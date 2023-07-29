@@ -1,0 +1,15 @@
+query GetBox($boxId: ID!) {
+	box(by: { id: $boxId }) {
+		id
+		name
+		description
+		contents(first: 100) {
+			edges {
+				node {
+					id
+					name
+				}
+			}
+		}
+	}
+}
