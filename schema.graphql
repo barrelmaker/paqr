@@ -1,0 +1,319 @@
+"""Directs the executor to return values as a Streaming response."""
+directive @live on QUERY
+
+"""Indicates that an input object is a oneOf input object"""
+directive @oneOf on INPUT_OBJECT
+
+type Box {
+  contents(after: String, before: String, first: Int, last: Int, orderBy: BoxOrderByInput): ContentConnection
+
+  """when the model was created"""
+  createdAt: DateTime!
+  description: String
+
+  """Unique identifier"""
+  id: ID!
+  name: String!
+
+  """when the model was updated"""
+  updatedAt: DateTime!
+}
+
+input BoxByInput {
+  id: ID
+}
+
+input BoxCollectionFilterInput {
+  id: IDCollectionFilterInput
+}
+
+type BoxConnection {
+  edges: [BoxEdge]
+
+  """Information to aid in pagination"""
+  pageInfo: PageInfo!
+}
+
+"""Input to create a Box"""
+input BoxCreateInput {
+  contents: [BoxToContentCreateContentRelation]
+  description: String
+  name: String!
+}
+
+input BoxCreateManyInput {
+  input: BoxCreateInput!
+}
+
+type BoxCreateManyPayload {
+  boxCollection: [Box!]!
+}
+
+type BoxCreatePayload {
+  box: Box
+}
+
+input BoxDeleteManyInput {
+  by: BoxByInput!
+}
+
+type BoxDeleteManyPayload {
+  deletedIds: [ID!]!
+}
+
+type BoxDeletePayload {
+  deletedId: ID!
+}
+
+type BoxEdge {
+  cursor: String!
+  node: Box!
+}
+
+input BoxOrderByInput {
+  createdAt: OrderByDirection
+}
+
+"""Input to create a Box for the BoxToContent relation of Content"""
+input BoxToContentCreateBox {
+  contents: [BoxToContentCreateContentRelation]
+  description: String
+  name: String!
+}
+
+"""
+Input to link to or create a Box for the BoxToContent relation of Content
+"""
+input BoxToContentCreateBoxRelation {
+  create: BoxToContentCreateBox
+  link: ID
+}
+
+"""Input to create a Content for the BoxToContent relation of Box"""
+input BoxToContentCreateContent {
+  name: String!
+}
+
+"""
+Input to link to or create a Content for the BoxToContent relation of Box
+"""
+input BoxToContentCreateContentRelation {
+  create: BoxToContentCreateContent
+  link: ID
+}
+
+"""
+Input to link/unlink to or create a Box for the BoxToContent relation of Content
+"""
+input BoxToContentUpdateBoxRelation {
+  create: BoxToContentCreateBox
+  link: ID
+  unlink: ID
+}
+
+"""
+Input to link/unlink to or create a Content for the BoxToContent relation of Box
+"""
+input BoxToContentUpdateContentRelation {
+  create: BoxToContentCreateContent
+  link: ID
+  unlink: ID
+}
+
+"""Input to update a Box"""
+input BoxUpdateInput {
+  contents: [BoxToContentUpdateContentRelation]
+  description: String
+  name: String
+}
+
+input BoxUpdateManyInput {
+  by: BoxByInput!
+  input: BoxUpdateInput!
+}
+
+type BoxUpdateManyPayload {
+  boxCollection: [Box!]!
+}
+
+type BoxUpdatePayload {
+  box: Box
+}
+
+type Content {
+  box: Box
+
+  """when the model was created"""
+  createdAt: DateTime!
+
+  """Unique identifier"""
+  id: ID!
+  name: String!
+
+  """when the model was updated"""
+  updatedAt: DateTime!
+}
+
+input ContentByInput {
+  id: ID
+}
+
+input ContentCollectionFilterInput {
+  id: IDCollectionFilterInput
+}
+
+type ContentConnection {
+  edges: [ContentEdge]
+
+  """Information to aid in pagination"""
+  pageInfo: PageInfo!
+}
+
+"""Input to create a Content"""
+input ContentCreateInput {
+  box: BoxToContentCreateBoxRelation
+  name: String!
+}
+
+input ContentCreateManyInput {
+  input: ContentCreateInput!
+}
+
+type ContentCreateManyPayload {
+  contentCollection: [Content!]!
+}
+
+type ContentCreatePayload {
+  content: Content
+}
+
+input ContentDeleteManyInput {
+  by: ContentByInput!
+}
+
+type ContentDeleteManyPayload {
+  deletedIds: [ID!]!
+}
+
+type ContentDeletePayload {
+  deletedId: ID!
+}
+
+type ContentEdge {
+  cursor: String!
+  node: Content!
+}
+
+input ContentOrderByInput {
+  createdAt: OrderByDirection
+}
+
+"""Input to update a Content"""
+input ContentUpdateInput {
+  box: BoxToContentUpdateBoxRelation
+  name: String
+}
+
+input ContentUpdateManyInput {
+  by: ContentByInput!
+  input: ContentUpdateInput!
+}
+
+type ContentUpdateManyPayload {
+  contentCollection: [Content!]!
+}
+
+type ContentUpdatePayload {
+  content: Content
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, is compliant with the date-time format outlined in section 5.6 of the RFC 3339
+profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+
+This scalar is a description of an exact instant on the timeline such as the instant that a user account was created.
+
+# Input Coercion
+
+When expected as an input type, only RFC 3339 compliant date-time strings are accepted. All other input values raise a query error indicating an incorrect type.
+
+# Result Coercion
+
+Where an RFC 3339 compliant date-time string has a time-zone other than UTC, it is shifted to UTC.
+For example, the date-time string 2016-01-01T14:10:20+01:00 is shifted to 2016-01-01T13:10:20Z.
+"""
+scalar DateTime
+
+input IDCollectionFilterInput {
+  in: [ID!]
+}
+
+type Mutation {
+  """Create a Box"""
+  boxCreate(input: BoxCreateInput!): BoxCreatePayload
+
+  """Create multiple Box"""
+  boxCreateMany(input: [BoxCreateManyInput!]!): BoxCreateManyPayload
+
+  """Delete a Box by ID or unique field"""
+  boxDelete(by: BoxByInput!): BoxDeletePayload
+
+  """Delete multiple Box"""
+  boxDeleteMany(input: [BoxDeleteManyInput!]!): BoxDeleteManyPayload
+
+  """Update a Box"""
+  boxUpdate(by: BoxByInput!, input: BoxUpdateInput!): BoxUpdatePayload
+
+  """Update multiple Box"""
+  boxUpdateMany(input: [BoxUpdateManyInput!]!): BoxUpdateManyPayload
+
+  """Create a Content"""
+  contentCreate(input: ContentCreateInput!): ContentCreatePayload
+
+  """Create multiple Content"""
+  contentCreateMany(input: [ContentCreateManyInput!]!): ContentCreateManyPayload
+
+  """Delete a Content by ID or unique field"""
+  contentDelete(by: ContentByInput!): ContentDeletePayload
+
+  """Delete multiple Content"""
+  contentDeleteMany(input: [ContentDeleteManyInput!]!): ContentDeleteManyPayload
+
+  """Update a Content"""
+  contentUpdate(by: ContentByInput!, input: ContentUpdateInput!): ContentUpdatePayload
+
+  """Update multiple Content"""
+  contentUpdateMany(input: [ContentUpdateManyInput!]!): ContentUpdateManyPayload
+}
+
+enum OrderByDirection {
+  ASC
+  DESC
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type Query {
+  """Query a single Box by an ID or a unique field"""
+  box(
+    """The field and value by which to query the Box"""
+    by: BoxByInput!
+  ): Box
+
+  """Paginated query to fetch the whole list of `Box`."""
+  boxCollection(after: String, before: String, filter: BoxCollectionFilterInput, first: Int, last: Int, orderBy: BoxOrderByInput): BoxConnection
+
+  """Query a single Content by an ID or a unique field"""
+  content(
+    """The field and value by which to query the Content"""
+    by: ContentByInput!
+  ): Content
+
+  """Paginated query to fetch the whole list of `Content`."""
+  contentCollection(after: String, before: String, filter: ContentCollectionFilterInput, first: Int, last: Int, orderBy: ContentOrderByInput): ContentConnection
+}
