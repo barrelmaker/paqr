@@ -1,5 +1,13 @@
-<div>
-	<h1>Page</h1>
-	<p>This is a page</p>
-	<a href="/">Home</a>
+<script>
+	$: createBox = () => {
+		console.log('createBox');
+	};
+</script>
+
+<div class="root">
+	<!-- Header -->
+	<h1>Paqr</h1>
+	<!-- Create Box -->
+	<button class="button" on:click={createBox}>Create Box</button>
+	<!-- Box List -->
 </div>

@@ -3,9 +3,89 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<link href="https://fonts.googleapis.com/css?family=Jost" rel="stylesheet" />
 		<meta name="viewport" content="width=device-width" />
 		%sveltekit.head%
 	</head>
+
+	<style>
+		body {
+			background-color: #222831;
+			height: 100vh;
+			max-width: 1500px;
+			margin: auto;
+		}
+		* {
+			font-family: 'Jost';
+		}
+		h1, h2, h3, h4, h5, h6, p {
+			color: #eeeeee;
+		}
+		.root {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.button {
+			color: #eeeeee;
+			padding: 8px;
+			border: 1px solid #393e46;
+			border-radius: 8px;
+			background-color: #00adb5;
+		}
+		.button:hover {
+			filter: brightness(110%);
+			transition: 0.2s;
+			cursor: pointer;
+		}
+		.c1 {
+			color: #eeeeee;
+		}
+		.bc1 {
+			background-color: #eeeeee;
+		}
+		.c2 {
+			color: #00adb5;
+		}
+		.bc2 {
+			background-color: #00adb5;
+		}
+		.c3 {
+			color: #393e46;
+		}
+		.bc3 {
+			background-color: #393e46;
+		}
+		.c4 {
+			color: #222831;
+		}
+		.bc4 {
+			background-color: #222831;
+		}
+		.list {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			width: 50%;
+		}
+		.content {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+		}
+		.contentActions {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		.qrcode {
+			width: 200px;
+			height: 200px;
+		}
+	</style>
+
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
