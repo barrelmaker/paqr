@@ -3,9 +3,7 @@
 	import { onMount } from 'svelte';
 
 	import type { PageData } from './$houdini';
-
 	export let data: PageData;
-
 	$: ({ GetBox } = data);
 
 	// Create QR Code
@@ -13,19 +11,6 @@
 		const canvas = document.getElementById('canvas');
 		QRCode.toCanvas(canvas, window.location.href);
 	});
-
-	$: addContent = () => {
-		console.log('addContent');
-	};
-	$: editContent = () => {
-		console.log('editContent');
-	};
-	$: deleteContent = () => {
-		console.log('deleteContent');
-	};
-	$: deleteBox = () => {
-		console.log('deleteBox');
-	};
 </script>
 
 <div class="root">
@@ -44,7 +29,10 @@
 		<h4>{$GetBox.data?.box?.description}</h4>
 
 		<!-- Delete Box -->
-		<button class="button" on:click={deleteBox}>Delete Box</button>
+		<form method="POST" action="?/deleteBox">
+			<input name="boxId" type="hidden" value={$GetBox.data?.box?.id} />
+			<button class="button">Delete Box</button>
+		</form>
 
 		<!-- Content List -->
 		{#if $GetBox.data?.box?.contents?.edges}
@@ -52,24 +40,30 @@
 				{#each $GetBox.data.box.contents.edges as content}
 					<!-- Content -->
 					<li class="content">
-						<h3>{content?.node.name}</h3>
-						<div class="contentActions">
-							<!-- Update Content -->
-							<button class="button" on:click={editContent}>Edit</button>
+						<!-- Update -->
+						<form method="POST" action="?/update">
+							<input name="name" value={content?.node.name} />
+							<input name="contentId" type="hidden" value={content?.node.id} />
+							<input name="boxId" type="hidden" value={$GetBox.data?.box?.id} />
+							<button class="button">Edit</button>
+						</form>
 
-							<!-- Delete Content -->
-							<button class="button" on:click={deleteContent}>Delete</button>
-						</div>
+						<!-- Delete -->
+						<form method="POST" action="?/delete">
+							<input name="contentId" type="hidden" value={content?.node.id} />
+							<button class="button">Delete</button>
+						</form>
 					</li>
 				{/each}
 
 				<!-- Create Content -->
-				<li class="content">
-					<h3>{'New Content'}</h3>
-
-					<!-- Update Content -->
-					<button class="button" on:click={addContent}>Add</button>
-				</li>
+				<form method="POST" action="?/create">
+					<li class="content">
+						<input name="name" />
+						<input name="boxId" type="hidden" value={$GetBox.data?.box?.id} />
+						<button class="button">Add</button>
+					</li>
+				</form>
 			</ul>
 		{/if}
 	{/if}
