@@ -1,0 +1,19 @@
+query GetBoxes {
+	boxCollection(first: 100) {
+		edges {
+			node {
+				id
+				name
+				description
+				contents(first: 100) {
+					edges {
+						node {
+							id
+							name
+						}
+					}
+				}
+			}
+		}
+	}
+}
