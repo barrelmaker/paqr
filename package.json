@@ -35,6 +35,7 @@
     "dependencies": {
         "@grafbase/houdini": "^1.0.0",
         "dotenv": "^16.3.1",
+        "feather-icons": "^4.29.0",
         "graphql": "^16.7.1",
         "qrcode": "^1.5.3"
     }

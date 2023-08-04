@@ -6,21 +6,21 @@
 	$: ({ GetBoxes } = data);
 </script>
 
-<div class="root">
+<div class="container">
 	<!-- Header -->
 	<h1>Paqr</h1>
 
 	<!-- Create Box -->
 	<form method="POST" action="?/create">
-		<label>
-			<h3>Name</h3>
-			<input name="name" type="name" />
+		<label for="name">
+			Name
+			<input type="name" id="name" name="name" placeholder="Name" />
 		</label>
-		<label>
-			<h3>Description</h3>
-			<input name="description" type="description" />
+		<label for="description">
+			Description
+			<input type="description" id="description" name="description" placeholder="Description" />
 		</label>
-		<button class="button">Create</button>
+		<button>Create</button>
 	</form>
 
 	<!-- Box List -->
@@ -29,11 +29,13 @@
 	{:else if $GetBoxes.errors}
 		<p>Oopsie! {$GetBoxes.errors[0].message}</p>
 	{:else if $GetBoxes.data?.boxCollection?.edges}
-		<div class="grid-container" style="padding-top: 32px;">
+		<div class="grid">
 			{#each $GetBoxes.data.boxCollection.edges as box}
-				<a class="grid-item" href={`/${box?.node.id}`}>
-					<h2>{box?.node.name}</h2>
-					<h4>{box?.node.description}</h4>
+				<a href={`/${box?.node.id}`}>
+					<article>
+						<h3>{box?.node.name}</h3>
+						<p>{box?.node.description}</p>
+					</article>
 				</a>
 			{/each}
 		</div>
