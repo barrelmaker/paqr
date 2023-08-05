@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100&display=swap');
+
+:root {
+	/* =~= Theme Properties =~= */
+	--theme-font-family-base: 'Inter', sans-serif;
+	--theme-font-family-heading: 'Inter', sans-serif;
+	--theme-font-color-base: 0 0 0;
+	--theme-font-color-dark: 255 255 255;
+	--theme-rounded-base: 9999px;
+	--theme-rounded-container: 8px;
+	--theme-border-base: 1px;
+	/* =~= Theme On-X Colors =~= */
+	--on-primary: 0 0 0;
+	--on-secondary: 255 255 255;
+	--on-tertiary: 0 0 0;
+	--on-success: 0 0 0;
+	--on-warning: 0 0 0;
+	--on-error: 255 255 255;
+	--on-surface: 0 0 0;
+	/* =~= Theme Colors  =~= */
+	/* primary | #f2bac2 */
+	--color-primary-50: 253 245 246; /* ⬅ #fdf5f6 */
+	--color-primary-100: 252 241 243; /* ⬅ #fcf1f3 */
+	--color-primary-200: 252 238 240; /* ⬅ #fceef0 */
+	--color-primary-300: 250 227 231; /* ⬅ #fae3e7 */
+	--color-primary-400: 246 207 212; /* ⬅ #f6cfd4 */
+	--color-primary-500: 242 186 194; /* ⬅ #f2bac2 */
+	--color-primary-600: 218 167 175; /* ⬅ #daa7af */
+	--color-primary-700: 182 140 146; /* ⬅ #b68c92 */
+	--color-primary-800: 145 112 116; /* ⬅ #917074 */
+	--color-primary-900: 119 91 95; /* ⬅ #775b5f */
+	/* secondary | #b040b3 */
+	--color-secondary-50: 243 226 244; /* ⬅ #f3e2f4 */
+	--color-secondary-100: 239 217 240; /* ⬅ #efd9f0 */
+	--color-secondary-200: 235 207 236; /* ⬅ #ebcfec */
+	--color-secondary-300: 223 179 225; /* ⬅ #dfb3e1 */
+	--color-secondary-400: 200 121 202; /* ⬅ #c879ca */
+	--color-secondary-500: 176 64 179; /* ⬅ #b040b3 */
+	--color-secondary-600: 158 58 161; /* ⬅ #9e3aa1 */
+	--color-secondary-700: 132 48 134; /* ⬅ #843086 */
+	--color-secondary-800: 106 38 107; /* ⬅ #6a266b */
+	--color-secondary-900: 86 31 88; /* ⬅ #561f58 */
+	/* tertiary | #2973fa */
+	--color-tertiary-50: 223 234 254; /* ⬅ #dfeafe */
+	--color-tertiary-100: 212 227 254; /* ⬅ #d4e3fe */
+	--color-tertiary-200: 202 220 254; /* ⬅ #cadcfe */
+	--color-tertiary-300: 169 199 253; /* ⬅ #a9c7fd */
+	--color-tertiary-400: 105 157 252; /* ⬅ #699dfc */
+	--color-tertiary-500: 41 115 250; /* ⬅ #2973fa */
+	--color-tertiary-600: 37 104 225; /* ⬅ #2568e1 */
+	--color-tertiary-700: 31 86 188; /* ⬅ #1f56bc */
+	--color-tertiary-800: 25 69 150; /* ⬅ #194596 */
+	--color-tertiary-900: 20 56 123; /* ⬅ #14387b */
+	/* success | #98ed92 */
+	--color-success-50: 240 252 239; /* ⬅ #f0fcef */
+	--color-success-100: 234 251 233; /* ⬅ #eafbe9 */
+	--color-success-200: 229 251 228; /* ⬅ #e5fbe4 */
+	--color-success-300: 214 248 211; /* ⬅ #d6f8d3 */
+	--color-success-400: 183 242 179; /* ⬅ #b7f2b3 */
+	--color-success-500: 152 237 146; /* ⬅ #98ed92 */
+	--color-success-600: 137 213 131; /* ⬅ #89d583 */
+	--color-success-700: 114 178 110; /* ⬅ #72b26e */
+	--color-success-800: 91 142 88; /* ⬅ #5b8e58 */
+	--color-success-900: 74 116 72; /* ⬅ #4a7448 */
+	/* warning | #ff8b4d */
+	--color-warning-50: 255 238 228; /* ⬅ #ffeee4 */
+	--color-warning-100: 255 232 219; /* ⬅ #ffe8db */
+	--color-warning-200: 255 226 211; /* ⬅ #ffe2d3 */
+	--color-warning-300: 255 209 184; /* ⬅ #ffd1b8 */
+	--color-warning-400: 255 174 130; /* ⬅ #ffae82 */
+	--color-warning-500: 255 139 77; /* ⬅ #ff8b4d */
+	--color-warning-600: 230 125 69; /* ⬅ #e67d45 */
+	--color-warning-700: 191 104 58; /* ⬅ #bf683a */
+	--color-warning-800: 153 83 46; /* ⬅ #99532e */
+	--color-warning-900: 125 68 38; /* ⬅ #7d4426 */
+	/* error | #f7222c */
+	--color-error-50: 254 222 223; /* ⬅ #fededf */
+	--color-error-100: 253 211 213; /* ⬅ #fdd3d5 */
+	--color-error-200: 253 200 202; /* ⬅ #fdc8ca */
+	--color-error-300: 252 167 171; /* ⬅ #fca7ab */
+	--color-error-400: 249 100 107; /* ⬅ #f9646b */
+	--color-error-500: 247 34 44; /* ⬅ #f7222c */
+	--color-error-600: 222 31 40; /* ⬅ #de1f28 */
+	--color-error-700: 185 26 33; /* ⬅ #b91a21 */
+	--color-error-800: 148 20 26; /* ⬅ #94141a */
+	--color-error-900: 121 17 22; /* ⬅ #791116 */
+	/* surface | #7495a8 */
+	--color-surface-50: 234 239 242; /* ⬅ #eaeff2 */
+	--color-surface-100: 227 234 238; /* ⬅ #e3eaee */
+	--color-surface-200: 220 229 233; /* ⬅ #dce5e9 */
+	--color-surface-300: 199 213 220; /* ⬅ #c7d5dc */
+	--color-surface-400: 158 181 194; /* ⬅ #9eb5c2 */
+	--color-surface-500: 116 149 168; /* ⬅ #7495a8 */
+	--color-surface-600: 104 134 151; /* ⬅ #688697 */
+	--color-surface-700: 87 112 126; /* ⬅ #57707e */
+	--color-surface-800: 70 89 101; /* ⬅ #465965 */
+	--color-surface-900: 57 73 82; /* ⬅ #394952 */
+}
+
+.gradient-heading {
+	@apply bg-clip-text text-transparent box-decoration-clone;
+	/* Direction */
+	@apply bg-gradient-to-br;
+	/* Color Stops */
+	@apply from-purple-200 to-pink-400;
+}
+
+.gradient-button {
+	/* Direction */
+	@apply bg-gradient-to-br;
+	/* Color Stops */
+	@apply from-purple-200 to-pink-400;
+}

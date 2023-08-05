@@ -2,10 +2,9 @@ import { graphql } from '$houdini';
 import { fail } from '@sveltejs/kit';
 
 export const actions = {
-	create: async (event) => {
+	createContent: async (event) => {
 		const data = await event.request.formData();
 
-		console.log({ name: data.get('name')?.toString(), boxId: data.get('boxId')?.toString() });
 		const name = data.get('name')?.toString();
 		if (!name) return fail(403, { name: 'name', message: 'Name is required' });
 
@@ -25,14 +24,8 @@ export const actions = {
 
 		return await actionMutation.mutate({ input: { name, box: { link: boxId } } }, { event });
 	},
-	update: async (event) => {
+	updateContent: async (event) => {
 		const data = await event.request.formData();
-
-		console.log({
-			contentId: data.get('contentId')?.toString(),
-			name: data.get('name')?.toString(),
-			boxId: data.get('boxId')?.toString()
-		});
 
 		const contentId = data.get('contentId')?.toString();
 		if (!contentId) return fail(403, { name: 'contentId', message: 'Content ID is required' });
@@ -59,12 +52,8 @@ export const actions = {
 			{ event }
 		);
 	},
-	delete: async (event) => {
+	deleteContent: async (event) => {
 		const data = await event.request.formData();
-
-		console.log({
-			contentId: data.get('contentId')?.toString()
-		});
 
 		const contentId = data.get('contentId')?.toString();
 		if (!contentId) return fail(403, { name: 'contentId', message: 'Content ID is required' });
@@ -82,10 +71,6 @@ export const actions = {
 	deleteBox: async (event) => {
 		const data = await event.request.formData();
 
-		console.log({
-			boxId: data.get('boxId')?.toString()
-		});
-
 		const boxId = data.get('boxId')?.toString();
 		if (!boxId) return fail(403, { name: 'boxId', message: 'Box ID is required' });
 
@@ -98,5 +83,30 @@ export const actions = {
 		`);
 
 		return await actionMutation.mutate({ by: { id: boxId } }, { event });
+	},
+	updateBox: async (event) => {
+		const data = await event.request.formData();
+
+		const name = data.get('name')?.toString();
+		const description = data.get('description')?.toString();
+
+		const boxId = data.get('boxId')?.toString();
+		if (!boxId) return fail(403, { name: 'boxId', message: 'Box ID is required' });
+
+		const actionMutation = graphql(`
+			mutation BoxUpdate($by: BoxByInput!, $input: BoxUpdateInput!) {
+				boxUpdate(by: $by, input: $input) {
+					box {
+						id
+						name
+					}
+				}
+			}
+		`);
+
+		return await actionMutation.mutate(
+			{ by: { id: boxId }, input: { name, description } },
+			{ event }
+		);
 	}
 };
