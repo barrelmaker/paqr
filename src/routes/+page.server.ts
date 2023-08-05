@@ -1,5 +1,5 @@
 import { graphql } from '$houdini';
-import { fail } from '@sveltejs/kit';
+import { fail, type Actions } from '@sveltejs/kit';
 
 export const actions = {
 	create: async (event) => {
@@ -22,8 +22,6 @@ export const actions = {
 			}
 		`);
 
-		const response = await actionMutation.mutate({ input: { name, description } }, { event });
-		console.log({ boxId: response.data?.boxCreate?.box?.id });
-		return response;
+		return await actionMutation.mutate({ input: { name, description } }, { event });
 	}
-};
+} satisfies Actions;
