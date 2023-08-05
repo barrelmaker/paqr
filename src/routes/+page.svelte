@@ -32,7 +32,7 @@
 		<!-- TODO: update error state -->
 		<p>Oopsie! {$GetBoxes.errors[0].message}</p>
 	{:else if $GetBoxes.data?.boxCollection?.edges}
-		<div class="grid grid-cols-4 gap-4 pt-10">
+		<div class="grid gap-4 pt-10 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 			{#each $GetBoxes.data.boxCollection.edges as box}
 				<a href={`/${box?.node.id}`} class="card card-hover p-4 overflow-hidden h-44">
 					<h3 class="h3 pb-2 line-clamp-2">{box?.node.name}</h3>
